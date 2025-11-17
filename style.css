@@ -1,122 +1,85 @@
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
+    background-color: #1a1a1a; /* Fundo escuro */
+    color: #f0f0f0; /* Texto claro */
+    font-family: 'Arial', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: black; /* Fundo Preto Principal */
-    color: white;
+    margin: 0;
+    overflow: hidden; /* Remove barras de rolagem */
 }
 
-/* ------------------------------------- */
-/* 1. ESTILO DO DISPLAY (Para o OBS)    */
-/* ------------------------------------- */
-
-#display-container {
-    width: 100%;
+#container {
     text-align: center;
+    padding: 20px;
 }
 
-#stopwatch-display {
-    font-size: 10vw; /* Tamanho grande para OBS */
+/* O DISPLAY PRINCIPAL PARA O OBS */
+#display {
+    font-size: 10em; /* Grande e visível */
     font-weight: bold;
-    color: white; /* Números Brancos */
-    padding: 20px;
-    background-color: black;
-    user-select: none;
+    color: #00ff99; /* Cor de destaque (Neon Green) */
+    text-shadow: 0 0 10px rgba(0, 255, 153, 0.7); /* Efeito neon */
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    border-radius: 10px;
 }
 
-/* ------------------------------------- */
-/* 2. ESTILO DO CONTROLADOR (Para o Celular) */
-/* ------------------------------------- */
-
-#control-container {
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-    background-color: #1a1a1a;
-    width: 90%;
-    max-width: 400px;
+/* Painel de Configuração (Escondido ou mais discreto para o OBS) */
+#config-panel input {
+    padding: 8px;
+    margin: 5px;
+    width: 80px;
     text-align: center;
+    border: 1px solid #444;
+    background-color: #333;
+    color: #f0f0f0;
+    border-radius: 5px;
 }
 
-#control-container h3 {
-    margin-top: 0;
-}
-
-.controls button, #set-time-btn {
-    padding: 15px 25px;
+/* Controles (Botões) */
+#controls button, #setTimerBtn {
+    padding: 10px 20px;
     margin: 5px;
     border: none;
-    border-radius: 6px;
-    font-size: 1.1em;
+    border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.2s;
-    width: 90%;
+    transition: background-color 0.3s;
 }
 
-/* Cores dos Botões */
-#start-btn {
-    background-color: #28a745; /* VERDE */
+#startStopBtn {
+    background-color: #007bff; /* Azul */
     color: white;
 }
 
-#pause-btn {
-    background-color: #dc3545; /* VERMELHO */
+#startStopBtn:hover {
+    background-color: #0056b3;
+}
+
+#resetBtn {
+    background-color: #dc3545; /* Vermelho */
     color: white;
 }
 
-#reset-btn {
-    background-color: white; /* BRANCO */
-    color: black;
+#resetBtn:hover {
+    background-color: #bd2130;
 }
 
-#set-time-btn {
-    background-color: #007bff;
+#modeBtn, #setTimerBtn {
+    background-color: #6c757d; /* Cinza */
     color: white;
-    margin-top: 10px;
 }
 
-.timer-input-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
+#modeBtn:hover, #setTimerBtn:hover {
+    background-color: #5a6268;
 }
 
-#countdown-input {
-    width: 80%;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #555;
-    background-color: #333;
-    color: white;
-    text-align: center;
-    font-size: 1em;
+/* Estilos específicos para quando o botão for 'Pausar' */
+#startStopBtn.running {
+    background-color: #ffc107; /* Amarelo */
+    color: #333;
 }
-
-.status-msg {
-    margin-top: 20px;
-    font-size: 1.1em;
-    font-style: italic;
-    color: #bbb;
-}
-
-/* LOGICA PARA ESCONDER/MOSTRAR */
-
-/* Esconde o controle por padrão */
-#control-container { display: none; }
-
-/* Se a URL tiver #control, mostra o controle e esconde o display */
-:target #control-container { display: block; }
-:target #display-container { display: none; }
-
-/* Se a URL tiver #display, mostra o display e esconde o controle */
-:target #display-container { display: block; }
-:target #control-container { display: none; }
-
-/* Configuração inicial: A página base (sem #) mostra o DISPLAY, mas você pode mudar para mostrar o CONTROLE se preferir */
-body:not(:has(:target)) #display-container { display: block; }
-body:not(:has(:target)) #control-container { display: none; }
